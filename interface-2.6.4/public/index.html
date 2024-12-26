@@ -1,43 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
   <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" type="image/png" href="%PUBLIC_URL%/favicon.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href="%PUBLIC_URL%/images/192x192_App_Icon.png" />
-    <link rel="apple-touch-icon" sizes="512x512" href="%PUBLIC_URL%/images/512x512_App_Icon.png" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ff007a" />
-    <meta name="fortmatic-site-verification" content="j93LgcVZk79qcgyo" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>ApeFiSwap DEX</title>
+
+    <link rel="icon" href="%PUBLIC_URL%/icon.png" />
+	  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link href="%PUBLIC_URL%/theme/css/style.css" rel="stylesheet" />	
+    
+	  <script>
+      // ==== pricing plan toggler
+      let togglePlan = document.querySelector('#togglePlan')
+      document.querySelector('.monthly').addEventListener('click', () => {
+        togglePlan.checked = true
+      })
+      document.querySelector('.yearly').addEventListener('click', () => {
+        togglePlan.checked = false
+      })
+      // ==== for menu scroll
+      const pageLink = document.querySelectorAll('.menu-scroll')
+      pageLink.forEach(elem => {
+        elem.addEventListener('click', e => {
+          e.preventDefault()
+          document.querySelector(elem.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth',
+            offsetTop: 1 - 60
+          })
+        })
+      })
+      // section menu active
+      function onScroll(event) {
+        const sections = document.querySelectorAll('.menu-scroll')
+        const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        for (let i = 0; i < sections.length; i++) {
+          const currLink = sections[i]
+          const val = currLink.getAttribute('href')
+          const refElement = document.querySelector(val)
+          const scrollTopMinus = scrollPos + 73
+          if (
+            refElement.offsetTop <= scrollTopMinus &&
+            refElement.offsetTop + refElement.offsetHeight > scrollTopMinus
+          ) {
+            document.querySelector('.menu-scroll').classList.remove('active')
+            currLink.classList.add('active')
+          } else {
+            currLink.classList.remove('active')
+          }
+        }
+      }
+      window.document.addEventListener('scroll', onScroll)
+
+      function initAcc(elem, option) {
+        document.addEventListener('click', function(e) {
+          if (!e.target.matches(elem + ' .faq-btn')) return
+          else {
+            if (!e.target.parentElement.classList.contains('active')) {
+              if (option == true) {
+                var elementList = document.querySelectorAll(elem + ' .faq')
+                Array.prototype.forEach.call(elementList, function(e) {
+                  e.classList.remove('active')
+                })
+              }
+              e.target.parentElement.classList.add('active')
+            } else {
+              e.target.parentElement.classList.remove('active')
+            }
+          }
+        })
+      }
+      //activate accordion function
+      initAcc('.faqs', true)
+    </script>
+    
+	  <script defer src="%PUBLIC_URL%/theme/js/bundle.js"></script>
+    <script>
+      (function() {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement('script');
+            d.innerHTML = "window.__CF$cv$params={r:'8f6d482dfb368419',t:'MTczNTAwODYwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='cdn-cgi/challenge-platform/h/b/scripts/jsd/787bc399e22f/maind41d.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName('head')[0].appendChild(d)
+          }
+        }
+        if (document.body) {
+          var a = document.createElement('iframe');
+          a.height = 1;
+          a.width = 1;
+          a.style.position = 'absolute';
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = 'none';
+          a.style.visibility = 'hidden';
+          document.body.appendChild(a);
+          if ('loading' !== document.readyState) c();
+          else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+          else {
+            var e = document.onreadystatechange || function() {};
+            document.onreadystatechange = function(b) {
+              e(b);
+              'loading' !== document.readyState && (document.onreadystatechange = e, c())
+            }
+          }
+        }
+      })();
+    </script>
   </head>
-  <body>
+  <body class="bg-white dark:bg-black">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- ======= Main React App Root Start ======= -->
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+	  <!-- ======= Main React App Root End ======= -->   
+    <!-- ======= Back To Top Start ======= -->
+    <a
+      href="javascript:void(0)"
+      class="back-to-top fixed bottom-8 right-8 left-auto z-[999] hidden h-10 w-10 items-center justify-center rounded-md bg-primary text-white shadow-md duration-300 ease-in-out hover:bg-opacity-80"
+    >
+      <span class="mt-[6px] h-3 w-3 rotate-45 border-t border-l border-white"></span>
+    </a>
+    <!-- ======= Back To Top End ======= -->
   </body>
 </html>

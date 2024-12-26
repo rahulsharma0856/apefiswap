@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { HashRouter, Route, Switch } from 'react-router-dom'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import Header from '../components/Header'
 import Popups from '../components/Popups'
@@ -21,41 +21,49 @@ import RemoveLiquidity from './RemoveLiquidity'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
 import Swap from './Swap'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
+import InfoPage from '../components/InfoPage'
+import Footer from '../components/Footer'
 
-const AppWrapper = styled.div`
-  display: flex;
-  flex-flow: column;
-  align-items: flex-start;
-  overflow-x: hidden;
-`
+// const AppWrapper = styled.div`
+//   display: flex;
+//   flex-flow: column;
+//   align-items: flex-start;
+//   overflow-x: hidden;
+// `
 
-const HeaderWrapper = styled.div`
-  ${({ theme }) => theme.flexRowNoWrap}
-  width: 100%;
-  justify-content: space-between;
-`
+// const HeaderWrapper = styled.div`
+//   ${({ theme }) => theme.flexRowNoWrap}
+//   width: 100%;
+//   justify-content: space-between;
+// `
 
-const BodyWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding-top: 160px;
-  align-items: center;
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  z-index: 10;
+// const BodyWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   width: 100%;
+//   padding-top: 160px;
+//   align-items: center;
+//   flex: 1;
+//   overflow-y: auto;
+//   overflow-x: hidden;
+//   z-index: 10;
 
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-      padding: 16px;
-  `};
+//   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+//       padding: 16px;
+//   `};
 
-  z-index: 1;
-`
+//   z-index: 1;
+// `
 
-const Marginer = styled.div`
-  margin-top: 5rem;
-`
+// const Marginer = styled.div`
+//   margin-top: 5rem;
+// `
+
+// const FooterWrapper = styled.div`
+//   ${({ theme }) => theme.flexRowNoWrap}
+//   width: 100%;
+//   justify-content: space-between;
+// `
 
 export default function App() {
   return (
@@ -63,11 +71,11 @@ export default function App() {
       <HashRouter>
         <Route component={GoogleAnalyticsReporter} />
         <Route component={DarkModeQueryParamReader} />
-        <AppWrapper>
-          <HeaderWrapper>
+        {/* <AppWrapper>
+          <HeaderWrapper> */}
             <Header />
-          </HeaderWrapper>
-          <BodyWrapper>
+          {/* </HeaderWrapper>
+          <BodyWrapper> */}
             <Popups />
             <Web3ReactManager>
               <Switch>
@@ -85,12 +93,17 @@ export default function App() {
                 <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
                 <Route exact strict path="/migrate/v1" component={MigrateV1} />
                 <Route exact strict path="/migrate/v1/:address" component={MigrateV1Exchange} />
-                <Route component={RedirectPathToSwapOnly} />
+                <Route exact strict path="/" component={InfoPage} />
+                <Route component={RedirectPathToSwapOnly} />                
+                
               </Switch>
             </Web3ReactManager>
-            <Marginer />
+            {/* <Marginer />
           </BodyWrapper>
-        </AppWrapper>
+          <FooterWrapper> */}
+            <Footer />
+          {/* </FooterWrapper>
+        </AppWrapper> */}
       </HashRouter>
     </Suspense>
   )

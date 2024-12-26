@@ -20,8 +20,8 @@ import { YellowCard } from '../Card'
 import Web3Status from '../Web3Status'
 // import VersionSwitch from './VersionSwitch'
 
-import "./Header.css";
-import "./bundle.js";
+// import "./Header.css";
+// import "./bundle.js";
 
 // const HeaderFrame = styled.div`
 //   display: flex;
@@ -236,10 +236,10 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo Section */}
           <div className="block py-4 lg:py-0">
-            <a href="/index" className="block max-w-[145px] sm:max-w-[180px]">            
+            <a href="/" className="block max-w-[145px] sm:max-w-[180px]">            
               <img  className="block dark:hidden" style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
               <img
-                src="images/apelogo.png"
+                src={isDark ? WordmarkDark : Wordmark}
                 alt="logo"
                 className="hidden dark:block"
               />
