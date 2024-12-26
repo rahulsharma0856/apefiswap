@@ -1,12 +1,6 @@
 import React from 'react';
-// import Wordmark from '../../assets/images/apelogo.png'
-// import WordmarkDark from '../../assets/svg/wordmark_white.svg'
-// import { useDarkModeManager } from '../../state/user/hooks'
 
 const Footer: React.FC = () => {
-
-  // const [isDark] = useDarkModeManager()
-
   return (
     <footer>
       <div className="bg-[#F8FAFB] pt-[95px] pb-[46px] dark:bg-[#15182A]">

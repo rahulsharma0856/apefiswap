@@ -13,12 +13,12 @@ import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
 
 import { YellowCard } from '../Card'
-// import Settings from '../Settings'
+import Settings from '../Settings'
 // import Menu from '../Menu'
 
 // import Row, { RowBetween } from '../Row'
 import Web3Status from '../Web3Status'
-// import VersionSwitch from './VersionSwitch'
+import VersionSwitch from './VersionSwitch'
 
 // import "./Header.css";
 // import "./bundle.js";
@@ -79,7 +79,7 @@ const AccountElement = styled.div<{ active: boolean }>`
   border-radius: 12px;
   white-space: nowrap;
   /*width: 100%;*/
-  width: 25%;
+  width: 10%;
 
   :focus {
     border: 1px solid blue;
@@ -430,7 +430,8 @@ export default function Header() {
              ) : null}
             <Web3Status />
           </AccountElement>
-
+          <VersionSwitch />
+          <Settings />
           {/* Theme Toggle */}
           <div className="mr-[60px] flex items-center justify-end lg:mr-0">
             <label
