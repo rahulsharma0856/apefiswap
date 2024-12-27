@@ -140,7 +140,7 @@ const InfoPage: React.FC = () => {
             <div className="w-full px-4 lg:w-7/12">
               <div
                 className="wow fadeInUp relative z-10 mx-auto w-full max-w-[530px] pt-8 lg:mr-0"
-                style={{ width: '70%' }}
+                style={{ width: '70%', zIndex: 2 }}
                 data-wow-delay=".4s"
               >
                 <img

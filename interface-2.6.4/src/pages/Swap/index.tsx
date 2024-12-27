@@ -471,8 +471,9 @@ export default function Swap() {
             {betterTradeLinkVersion && <BetterTradeLink version={betterTradeLinkVersion} />}
           </BottomGrouping>
         </Wrapper>
+        <AdvancedSwapDetailsDropdown trade={trade} />
       </AppBody>
-      <AdvancedSwapDetailsDropdown trade={trade} />
+      
     </>
   )
 }

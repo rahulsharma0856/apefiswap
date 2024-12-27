@@ -423,7 +423,7 @@ export default function Header() {
           <VersionSwitch />
           <Settings />
           {/* Theme Toggle */}
-          <div className="mr-[60px] flex items-center justify-end lg:mr-0">
+          {/* <div className="mr-[60px] flex items-center justify-end lg:mr-0">
             <label
               htmlFor="themeSwitcher"
               className="inline-flex cursor-pointer items-center"
@@ -443,8 +443,7 @@ export default function Header() {
                   viewBox="0 0 21 21"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* SVG content */}
+                >                
                 </svg>
               </span>
               <span className="block dark:hidden">
@@ -460,7 +459,7 @@ export default function Header() {
                 </svg>
               </span>
             </label>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>
