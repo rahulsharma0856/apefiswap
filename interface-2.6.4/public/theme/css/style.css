@@ -1465,7 +1465,7 @@ body{
   background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 100%);
 }
 .bg-gradient-1{
-  background-image: linear-gradient(55.15deg, rgb(20, 216, 157) -7.09%, rgb(20, 216, 157) 51.72%, rgb(20, 216, 157) 101.48%);
+  background-image: linear-gradient(55.15deg, rgb(46 171 71) -7.09%, rgb(46 171 71) 51.72%, rgb(46 171 71) 101.48%);
 }
 .bg-texture{
   background-image: url(images/texture.svg);
@@ -1757,7 +1757,7 @@ body{
 }
 .text-primary{
   --tw-text-opacity: 1;
-  color: rgb(8 168 138 / var(--tw-text-opacity));
+  color: rgb(46 171 71 / var(--tw-text-opacity));
 }
 .underline{
   -webkit-text-decoration-line: underline;

@@ -334,10 +334,7 @@ export default function Header() {
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
-                      >
+                      <a href="#" className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary">
                          Launchpad 
                       </a>
                     </li>
@@ -391,20 +388,13 @@ export default function Header() {
                   <ul className="submenu hidden space-y-5 pt-5 duration-300 lg:invisible lg:absolute lg:top-[120%] lg:block lg:w-[250px] lg:rounded-lg lg:bg-white lg:px-8 lg:pb-5 lg:text-left lg:opacity-0 lg:shadow-card lg:group-hover:visible lg:group-hover:top-full lg:group-hover:opacity-100 dark:lg:border-transparent dark:lg:bg-[#15182A] lg:dark:shadow-card-dark">
                     <li>
                       <a
-                        href="#"
+                                              href="https://apechain.com/relay-bridge"
                         className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
                       >
                         Ape Bridge 
                       </a>
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
-                      >
-                        Liquidity
-                      </a>
-                    </li>
+                   
                   </ul>
                 </li> 
                 <li className="submenu-item menu-item group relative">

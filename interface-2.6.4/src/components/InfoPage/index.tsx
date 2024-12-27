@@ -77,7 +77,7 @@ const InfoPage: React.FC = () => {
                     style={{
                       width: '30%',
                       height: '50px',
-                      background: 'rgb(20, 216, 157)',
+                      background: 'rgb(46 171 71)',
                       borderRadius: '25px',
                       display: 'flex',
                       flexFlow: 'row',
@@ -100,7 +100,7 @@ const InfoPage: React.FC = () => {
                       width: '30%',
                       marginLeft: '8px',
                       height: '50px',
-                      background: 'rgb(20, 216, 157)',
+                      background: 'rgb(46 171 71)',
                       borderRadius: '25px',
                       display: 'flex',
                       flexFlow: 'row',
