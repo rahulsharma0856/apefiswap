@@ -79,7 +79,7 @@ const AccountElement = styled.div<{ active: boolean }>`
   border-radius: 12px;
   white-space: nowrap;
   /*width: 100%;*/
-  width: 10%;
+  width: 20%;
 
   :focus {
     border: 1px solid blue;
