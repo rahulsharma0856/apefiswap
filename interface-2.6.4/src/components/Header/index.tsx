@@ -397,14 +397,6 @@ export default function Header() {
                    
                   </ul>
                 </li> 
-                <li className="submenu-item menu-item group relative">
-                  <a
-                    href="#"
-                    className="submenu-taggler inline-flex items-center text-base font-medium text-black hover:text-primary group-hover:text-primary dark:text-white dark:hover:text-primary lg:py-7"
-                  >
-                    Support                   
-                  </a>                
-                </li> 
               </ul>
             </nav>
           </div>
