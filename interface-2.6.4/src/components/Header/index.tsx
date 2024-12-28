@@ -1,24 +1,24 @@
-import { ChainId } from '@uniswap/sdk'
-import React from 'react'
-import { isMobile } from 'react-device-detect'
-import { Text } from 'rebass'
-import styled from 'styled-components'
+import { ChainId } from "@uniswap/sdk";
+import React from "react";
+import { isMobile } from "react-device-detect";
+import { Text } from "rebass";
+import styled from "styled-components";
 
 // import Logo from '../../assets/svg/logo.svg'
 // import LogoDark from '../../assets/svg/logo_white.svg'
-import Wordmark from '../../assets/images/apelogo.png'
-import WordmarkDark from '../../assets/svg/wordmark_white.svg'
-import { useActiveWeb3React } from '../../hooks'
-import { useDarkModeManager } from '../../state/user/hooks'
-import { useETHBalances } from '../../state/wallet/hooks'
+import Wordmark from "../../assets/images/apelogo.png";
+import WordmarkDark from "../../assets/svg/wordmark_white.svg";
+import { useActiveWeb3React } from "../../hooks";
+import { useDarkModeManager } from "../../state/user/hooks";
+import { useETHBalances } from "../../state/wallet/hooks";
 
-import { YellowCard } from '../Card'
-import Settings from '../Settings'
+import { YellowCard } from "../Card";
+import Settings from "../Settings";
 // import Menu from '../Menu'
 
 // import Row, { RowBetween } from '../Row'
-import Web3Status from '../Web3Status'
-import VersionSwitch from './VersionSwitch'
+import Web3Status from "../Web3Status";
+import VersionSwitch from "./VersionSwitch";
 
 // import "./Header.css";
 // import "./bundle.js";
@@ -84,21 +84,21 @@ const AccountElement = styled.div<{ active: boolean }>`
   :focus {
     border: 1px solid blue;
   }
-`
+`;
 
 const TestnetWrapper = styled.div`
   white-space: nowrap;
   width: fit-content;
   margin-left: 10px;
   pointer-events: auto;
-`
+`;
 
 const NetworkCard = styled(YellowCard)`
   width: fit-content;
   margin-right: 10px;
   border-radius: 12px;
   padding: 8px 12px;
-`
+`;
 
 // const UniIcon = styled.div`
 //   transition: transform 0.3s ease;
@@ -106,7 +106,7 @@ const NetworkCard = styled(YellowCard)`
 //     transform: rotate(-5deg);
 //   }
 //   ${({ theme }) => theme.mediaWidth.upToSmall`
-//     img { 
+//     img {
 //       width: 4.5rem;
 //     }
 //   `};
@@ -127,7 +127,7 @@ const BalanceText = styled(Text)`
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     display: none;
   `};
-`
+`;
 
 // const DropdownMenu = styled.div`
 //   position: relative;
@@ -166,256 +166,283 @@ const BalanceText = styled(Text)`
 //   }
 // `
 
-const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {  
-  [ChainId.BSC]: 'BSC'
-}
+const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
+    [ChainId.BSC]: "BSC",
+};
 
 export default function Header() {
-  const { account, chainId } = useActiveWeb3React()
-  const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-  const [isDark] = useDarkModeManager()
+    const { account, chainId } = useActiveWeb3React();
+    const userEthBalance = useETHBalances(account ? [account] : [])?.[
+        account ?? ""
+    ];
+    const [isDark] = useDarkModeManager();
 
-  // return (
-  //   <HeaderFrame>
-  //     <RowBetween style={{ alignItems: 'flex-start' }} padding="1rem 1rem 0 1rem">
-  //       <HeaderElement>
-  //         <Title href=".">
-  //           <UniIcon>
-  //             <img src={isDark ? LogoDark : Logo} alt="logo" />
-  //           </UniIcon>
-  //           <TitleText>
-  //             <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
-  //           </TitleText>
-  //         </Title>
-  //       </HeaderElement>
-  //       <HeaderControls>
-  //         <HeaderElement>
-            
-  //           <DropdownMenu>
-  //             <span>Trade</span>
-  //             <DropdownContent>
-  //               <li><a href="/swap">Swap</a></li>
-  //               <li><a href="/liquidity">Liquidity</a></li>
-  //               <li><a href="/rolling">Rolling</a></li>
-  //             </DropdownContent>
-  //           </DropdownMenu>
-  //           <DropdownMenu>
-  //             <span>Earn</span>
-  //             <DropdownContent>
-  //               <li><a href="/bar">Bar</a></li>
-  //               <li><a href="#/pool">Wine Pool</a></li>
-  //               <li><a href="/lunch-pad">Lunch Pad</a></li>
-  //             </DropdownContent>
-  //           </DropdownMenu>
+    // return (
+    //   <HeaderFrame>
+    //     <RowBetween style={{ alignItems: 'flex-start' }} padding="1rem 1rem 0 1rem">
+    //       <HeaderElement>
+    //         <Title href=".">
+    //           <UniIcon>
+    //             <img src={isDark ? LogoDark : Logo} alt="logo" />
+    //           </UniIcon>
+    //           <TitleText>
+    //             <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
+    //           </TitleText>
+    //         </Title>
+    //       </HeaderElement>
+    //       <HeaderControls>
+    //         <HeaderElement>
 
-  //           <TestnetWrapper>
-  //             {!isMobile && chainId && NETWORK_LABELS[chainId] && <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>}
-  //           </TestnetWrapper>
-  //           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
-  //             {account && userEthBalance ? (
-  //               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-  //                 {userEthBalance?.toSignificant(4)} ETH
-  //               </BalanceText>
-  //             ) : null}
-  //             <Web3Status />
-  //           </AccountElement>
-  //         </HeaderElement>
-  //         <HeaderElementWrap>
-  //           <VersionSwitch />
-  //           <Settings />
-  //           <Menu />
-  //         </HeaderElementWrap>
-  //       </HeaderControls>
-  //     </RowBetween>
-  //   </HeaderFrame>
-  // )
+    //           <DropdownMenu>
+    //             <span>Trade</span>
+    //             <DropdownContent>
+    //               <li><a href="/swap">Swap</a></li>
+    //               <li><a href="/liquidity">Liquidity</a></li>
+    //               <li><a href="/rolling">Rolling</a></li>
+    //             </DropdownContent>
+    //           </DropdownMenu>
+    //           <DropdownMenu>
+    //             <span>Earn</span>
+    //             <DropdownContent>
+    //               <li><a href="/bar">Bar</a></li>
+    //               <li><a href="#/pool">Wine Pool</a></li>
+    //               <li><a href="/lunch-pad">Lunch Pad</a></li>
+    //             </DropdownContent>
+    //           </DropdownMenu>
 
-  return (
-    <header className="navbar absolute top-0 left-0 z-50 w-full border-stroke bg-white duration-300 dark:border-stroke-dark dark:bg-black">
-      <div className="container relative max-w-[1400px]">
-        <div className="flex items-center justify-between">
-          {/* Logo Section */}
-          <div className="block py-4 lg:py-0">
-            <a href="/" className="block max-w-[145px] sm:max-w-[180px]">            
-              <img  className="block dark:hidden" style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
-              <img
-                src={isDark ? WordmarkDark : Wordmark}
-                alt="logo"
-                className="hidden dark:block"
-              />
-            </a>
-          </div>
+    //           <TestnetWrapper>
+    //             {!isMobile && chainId && NETWORK_LABELS[chainId] && <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>}
+    //           </TestnetWrapper>
+    //           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
+    //             {account && userEthBalance ? (
+    //               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+    //                 {userEthBalance?.toSignificant(4)} ETH
+    //               </BalanceText>
+    //             ) : null}
+    //             <Web3Status />
+    //           </AccountElement>
+    //         </HeaderElement>
+    //         <HeaderElementWrap>
+    //           <VersionSwitch />
+    //           <Settings />
+    //           <Menu />
+    //         </HeaderElementWrap>
+    //       </HeaderControls>
+    //     </RowBetween>
+    //   </HeaderFrame>
+    // )
 
-          {/* Navbar Toggle Button for Mobile */}
-          <button
-            className="navbarOpen absolute right-4 top-1/2 z-50 flex h-10 w-10 -translate-y-1/2 flex-col items-center justify-center space-y-[6px] font-bold lg:hidden"
-            aria-label="navbarOpen"
-            name="navbarOpen"
-          >
-            <span className="block h-[2px] w-7 bg-black dark:bg-white"></span>
-            <span className="block h-[2px] w-7 bg-black dark:bg-white"></span>
-            <span className="block h-[2px] w-7 bg-black dark:bg-white"></span>
-          </button>
+    return (
+        <header className="navbar absolute top-0 left-0 z-50 w-full border-stroke bg-white duration-300 dark:border-stroke-dark dark:bg-black">
+            <div className="container relative max-w-[1400px]">
+                <div className="flex items-center justify-between">
+                    {/* Logo Section */}
+                    <div className="block py-4 lg:py-0">
+                        <a href="/" className="block max-w-[145px] sm:max-w-[180px]">
+                            <img
+                                className="block dark:hidden"
+                                style={{ marginLeft: "4px", marginTop: "4px" }}
+                                src={isDark ? WordmarkDark : Wordmark}
+                                alt="logo"
+                            />
+                            <img
+                                src={isDark ? WordmarkDark : Wordmark}
+                                alt="logo"
+                                className="hidden dark:block"
+                            />
+                        </a>
+                    </div>
 
-          {/* Menu Wrapper */}
-          <div className="menu-wrapper relative hidden justify-between lg:flex">
-            <button
-              className="navbarClose fixed top-10 right-10 z-[9999] flex h-10 w-10 flex-col items-center justify-center font-bold lg:hidden"
-              name="navbarClose"
-              aria-label="navbarClose"
-            >
-              <span className="block h-[2px] w-7 rotate-45 bg-black dark:bg-white"></span>
-              <span className="-mt-[2px] block h-[2px] w-7 -rotate-45 bg-black dark:bg-white"></span>
-            </button>
+                    {/* Navbar Toggle Button for Mobile */}
+                    <button
+                        className="navbarOpen absolute right-4 top-1/2 z-50 flex h-10 w-10 -translate-y-1/2 flex-col items-center justify-center space-y-[6px] font-bold lg:hidden"
+                        aria-label="navbarOpen"
+                        name="navbarOpen"
+                    >
+                        <span className="block h-[2px] w-7 bg-black dark:bg-white"></span>
+                        <span className="block h-[2px] w-7 bg-black dark:bg-white"></span>
+                        <span className="block h-[2px] w-7 bg-black dark:bg-white"></span>
+                    </button>
 
-            {/* Navigation Menu */}
-            <nav className="fixed top-0 left-0 z-[999] flex h-screen w-full items-center justify-center bg-white bg-opacity-95 text-center backdrop-blur-sm dark:bg-black dark:bg-opacity-95 lg:static lg:h-auto lg:w-max lg:bg-transparent lg:backdrop-blur-none lg:dark:bg-transparent">
-              <ul className="items-center space-y-3 lg:flex lg:space-x-8 lg:space-y-0 xl:space-x-10">
-                <li className="submenu-item menu-item group relative">
-                  <a
-                    href="#"
-                    className="submenu-taggler inline-flex items-center text-base font-medium text-black hover:text-primary group-hover:text-primary dark:text-white dark:hover:text-primary lg:py-7"
-                  >
-                    Trade
-                    <span className="pl-3">
-                      <svg
-                        width="14"
-                        height="8"
-                        viewBox="0 0 14 8"
-                        className="fill-current"
-                      >
-                        <path d="M6.54564 5.09128L11.6369 0L13.0913 1.45436L6.54564 8L0 1.45436L1.45436 0L6.54564 5.09128Z" />
-                      </svg>
-                    </span>
-                  </a>
-                  <ul className="submenu hidden space-y-5 pt-5 duration-300 lg:invisible lg:absolute lg:top-[120%] lg:block lg:w-[250px] lg:rounded-lg lg:bg-white lg:px-8 lg:pb-5 lg:text-left lg:opacity-0 lg:shadow-card lg:group-hover:visible lg:group-hover:top-full lg:group-hover:opacity-100 dark:lg:border-transparent dark:lg:bg-[#15182A] lg:dark:shadow-card-dark">
-                    <li>
-                      <a
-                        href="#/swap"
-                        className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
-                      >
-                        Swap
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#/pool"
-                        className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
-                      >
-                        Liquidity
-                      </a>
-                    </li>
-                  </ul>
-                </li>                
-                <li className="submenu-item menu-item group relative">
-                  <a
-                    href="#"
-                    className="submenu-taggler inline-flex items-center text-base font-medium text-black hover:text-primary group-hover:text-primary dark:text-white dark:hover:text-primary lg:py-7"
-                  >
-                    Earn
-                    <span className="pl-3">
-                      <svg
-                        width="14"
-                        height="8"
-                        viewBox="0 0 14 8"
-                        className="fill-current"
-                      >
-                        <path d="M6.54564 5.09128L11.6369 0L13.0913 1.45436L6.54564 8L0 1.45436L1.45436 0L6.54564 5.09128Z" />
-                      </svg>
-                    </span>
-                  </a>
-                  <ul className="submenu hidden space-y-5 pt-5 duration-300 lg:invisible lg:absolute lg:top-[120%] lg:block lg:w-[250px] lg:rounded-lg lg:bg-white lg:px-8 lg:pb-5 lg:text-left lg:opacity-0 lg:shadow-card lg:group-hover:visible lg:group-hover:top-full lg:group-hover:opacity-100 dark:lg:border-transparent dark:lg:bg-[#15182A] lg:dark:shadow-card-dark">
-                    <li>
-                      <a
-                        href="#"
-                        className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
-                      >
-                        Ape Pools
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary">
-                         Launchpad 
-                      </a>
-                    </li>
-                  </ul>
-                </li> 
-                <li className="submenu-item menu-item group relative">
-                  <a
-                    href="#"
-                    className="submenu-taggler inline-flex items-center text-base font-medium text-black hover:text-primary group-hover:text-primary dark:text-white dark:hover:text-primary lg:py-7"
-                  >
-                    ApeFi Product 
-                    <span className="pl-3">
-                      <svg
-                        width="14"
-                        height="8"
-                        viewBox="0 0 14 8"
-                        className="fill-current"
-                      >
-                        <path d="M6.54564 5.09128L11.6369 0L13.0913 1.45436L6.54564 8L0 1.45436L1.45436 0L6.54564 5.09128Z" />
-                      </svg>
-                    </span>
-                  </a>
-                  <ul className="submenu hidden space-y-5 pt-5 duration-300 lg:invisible lg:absolute lg:top-[120%] lg:block lg:w-[250px] lg:rounded-lg lg:bg-white lg:px-8 lg:pb-5 lg:text-left lg:opacity-0 lg:shadow-card lg:group-hover:visible lg:group-hover:top-full lg:group-hover:opacity-100 dark:lg:border-transparent dark:lg:bg-[#15182A] lg:dark:shadow-card-dark">
-                    <li>
-                      <a
-                        href="#"
-                        className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
-                      >
-                       
-                      </a>
-                    </li>                 
-                  </ul>
-                </li>                
-                <li className="submenu-item menu-item group relative">
-                  <a
-                    href="#"
-                    className="submenu-taggler inline-flex items-center text-base font-medium text-black hover:text-primary group-hover:text-primary dark:text-white dark:hover:text-primary lg:py-7"
-                  >
-                    Cross Chain 
-                    <span className="pl-3">
-                      <svg
-                        width="14"
-                        height="8"
-                        viewBox="0 0 14 8"
-                        className="fill-current"
-                      >
-                        <path d="M6.54564 5.09128L11.6369 0L13.0913 1.45436L6.54564 8L0 1.45436L1.45436 0L6.54564 5.09128Z" />
-                      </svg>
-                    </span>
-                  </a>
-                  <ul className="submenu hidden space-y-5 pt-5 duration-300 lg:invisible lg:absolute lg:top-[120%] lg:block lg:w-[250px] lg:rounded-lg lg:bg-white lg:px-8 lg:pb-5 lg:text-left lg:opacity-0 lg:shadow-card lg:group-hover:visible lg:group-hover:top-full lg:group-hover:opacity-100 dark:lg:border-transparent dark:lg:bg-[#15182A] lg:dark:shadow-card-dark">
-                    <li>
-                      <a
-                                              href="https://apechain.com/relay-bridge"
-                        className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
-                      >
-                        Ape Bridge 
-                      </a>
-                    </li>
-                   
-                  </ul>
-                </li> 
-              </ul>
-            </nav>
-          </div>
-          
-          <TestnetWrapper>
-           {!isMobile && chainId && NETWORK_LABELS[chainId] && <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>}
-           </TestnetWrapper>
-           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
-             {account && userEthBalance ? (
-              <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                {userEthBalance?.toSignificant(4)} ETH
-               </BalanceText>
-             ) : null}
-            <Web3Status />
-          </AccountElement>
-          <VersionSwitch />
-          <Settings />
-          {/* Theme Toggle */}
-          {/* <div className="mr-[60px] flex items-center justify-end lg:mr-0">
+                    {/* Menu Wrapper */}
+                    <div className="menu-wrapper relative hidden justify-between lg:flex">
+                        <button
+                            className="navbarClose fixed top-10 right-10 z-[9999] flex h-10 w-10 flex-col items-center justify-center font-bold lg:hidden"
+                            name="navbarClose"
+                            aria-label="navbarClose"
+                        >
+                            <span className="block h-[2px] w-7 rotate-45 bg-black dark:bg-white"></span>
+                            <span className="-mt-[2px] block h-[2px] w-7 -rotate-45 bg-black dark:bg-white"></span>
+                        </button>
+
+                        {/* Navigation Menu */}
+                        <nav className="fixed top-0 left-0 z-[999] flex h-screen w-full items-center justify-center bg-white bg-opacity-95 text-center backdrop-blur-sm dark:bg-black dark:bg-opacity-95 lg:static lg:h-auto lg:w-max lg:bg-transparent lg:backdrop-blur-none lg:dark:bg-transparent">
+                            <ul className="items-center space-y-3 lg:flex lg:space-x-8 lg:space-y-0 xl:space-x-10">
+                                <li className="submenu-item menu-item group relative">
+                                    <a
+                                        href="#"
+                                        className="submenu-taggler inline-flex items-center text-base font-medium text-black hover:text-primary group-hover:text-primary dark:text-white dark:hover:text-primary lg:py-7"
+                                    >
+                                        Trade
+                                        <span className="pl-3">
+                                            <svg
+                                                width="14"
+                                                height="8"
+                                                viewBox="0 0 14 8"
+                                                className="fill-current"
+                                            >
+                                                <path d="M6.54564 5.09128L11.6369 0L13.0913 1.45436L6.54564 8L0 1.45436L1.45436 0L6.54564 5.09128Z" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <ul className="submenu hidden space-y-5 pt-5 duration-300 lg:invisible lg:absolute lg:top-[120%] lg:block lg:w-[250px] lg:rounded-lg lg:bg-white lg:px-8 lg:pb-5 lg:text-left lg:opacity-0 lg:shadow-card lg:group-hover:visible lg:group-hover:top-full lg:group-hover:opacity-100 dark:lg:border-transparent dark:lg:bg-[#15182A] lg:dark:shadow-card-dark">
+                                        <li>
+                                            <a
+                                                href="#/swap"
+                                                className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
+                                            >
+                                                Swap
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="#/pool"
+                                                className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
+                                            >
+                                                Liquidity
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li className="submenu-item menu-item group relative">
+                                    <a
+                                        href="#"
+                                        className="submenu-taggler inline-flex items-center text-base font-medium text-black hover:text-primary group-hover:text-primary dark:text-white dark:hover:text-primary lg:py-7"
+                                    >
+                                        Earn
+                                        <span className="pl-3">
+                                            <svg
+                                                width="14"
+                                                height="8"
+                                                viewBox="0 0 14 8"
+                                                className="fill-current"
+                                            >
+                                                <path d="M6.54564 5.09128L11.6369 0L13.0913 1.45436L6.54564 8L0 1.45436L1.45436 0L6.54564 5.09128Z" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <ul className="submenu hidden space-y-5 pt-5 duration-300 lg:invisible lg:absolute lg:top-[120%] lg:block lg:w-[250px] lg:rounded-lg lg:bg-white lg:px-8 lg:pb-5 lg:text-left lg:opacity-0 lg:shadow-card lg:group-hover:visible lg:group-hover:top-full lg:group-hover:opacity-100 dark:lg:border-transparent dark:lg:bg-[#15182A] lg:dark:shadow-card-dark">
+                                        <li>
+                                            <a
+                                                href="#"
+                                                className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
+                                                onClick={() =>
+                                                    alert(
+                                                        "Good things take time. Page Coming up Shortly!"
+                                                    )
+                                                }
+                                            >
+                                                Ape Pools
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="#"
+                                                className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
+                                                onClick={() =>
+                                                    alert(
+                                                        "Good things take time. Page Coming up Shortly!"
+                                                    )
+                                                }
+                                            >
+                                                Launchpad
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li className="submenu-item menu-item group relative">
+                                    <a
+                                        href="#"
+                                        className="submenu-taggler inline-flex items-center text-base font-medium text-black hover:text-primary group-hover:text-primary dark:text-white dark:hover:text-primary lg:py-7"
+                                        onClick={() =>
+                                            alert("Cooking up something exciting. Stay tuned!")
+                                        }
+                                    >
+                                        ApeFi Product
+                                        <span className="pl-3">
+                                            <svg
+                                                width="14"
+                                                height="8"
+                                                viewBox="0 0 14 8"
+                                                className="fill-current"
+                                            >
+                                                <path d="M6.54564 5.09128L11.6369 0L13.0913 1.45436L6.54564 8L0 1.45436L1.45436 0L6.54564 5.09128Z" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <ul className="submenu hidden space-y-5 pt-5 duration-300 lg:invisible lg:absolute lg:top-[120%] lg:block lg:w-[250px] lg:rounded-lg lg:bg-white lg:px-8 lg:pb-5 lg:text-left lg:opacity-0 lg:shadow-card lg:group-hover:visible lg:group-hover:top-full lg:group-hover:opacity-100 dark:lg:border-transparent dark:lg:bg-[#15182A] lg:dark:shadow-card-dark">
+                                        <li>
+                                            <a
+                                                href="#"
+                                                className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li className="submenu-item menu-item group relative">
+                                    <a
+                                        href="#"
+                                        className="submenu-taggler inline-flex items-center text-base font-medium text-black hover:text-primary group-hover:text-primary dark:text-white dark:hover:text-primary lg:py-7"
+                                    >
+                                        Cross Chain
+                                        <span className="pl-3">
+                                            <svg
+                                                width="14"
+                                                height="8"
+                                                viewBox="0 0 14 8"
+                                                className="fill-current"
+                                            >
+                                                <path d="M6.54564 5.09128L11.6369 0L13.0913 1.45436L6.54564 8L0 1.45436L1.45436 0L6.54564 5.09128Z" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <ul className="submenu hidden space-y-5 pt-5 duration-300 lg:invisible lg:absolute lg:top-[120%] lg:block lg:w-[250px] lg:rounded-lg lg:bg-white lg:px-8 lg:pb-5 lg:text-left lg:opacity-0 lg:shadow-card lg:group-hover:visible lg:group-hover:top-full lg:group-hover:opacity-100 dark:lg:border-transparent dark:lg:bg-[#15182A] lg:dark:shadow-card-dark">
+                                        <li>
+                                            <a
+                                                href="https://apechain.com/relay-bridge"
+                                                className="font-heading inline-flex items-center justify-center text-center text-base text-black hover:text-primary dark:text-white dark:hover:text-primary"
+                                            >
+                                                Ape Bridge
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <TestnetWrapper>
+                        {!isMobile && chainId && NETWORK_LABELS[chainId] && (
+                            <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>
+                        )}
+                    </TestnetWrapper>
+                    <AccountElement active={!!account} style={{ pointerEvents: "auto" }}>
+                        {account && userEthBalance ? (
+                            <BalanceText
+                                style={{ flexShrink: 0 }}
+                                pl="0.75rem"
+                                pr="0.5rem"
+                                fontWeight={500}
+                            >
+                                {userEthBalance?.toSignificant(4)} ETH
+                            </BalanceText>
+                        ) : null}
+                        <Web3Status />
+                    </AccountElement>
+                    <VersionSwitch />
+                    <Settings />
+                    {/* Theme Toggle */}
+                    {/* <div className="mr-[60px] flex items-center justify-end lg:mr-0">
             <label
               htmlFor="themeSwitcher"
               className="inline-flex cursor-pointer items-center"
@@ -452,9 +479,8 @@ export default function Header() {
               </span>
             </label>
           </div> */}
-        </div>
-      </div>
-    </header>
-  );
-
+                </div>
+            </div>
+        </header>
+    );
 }
